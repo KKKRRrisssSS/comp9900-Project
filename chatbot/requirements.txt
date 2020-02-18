@@ -5,4 +5,4 @@ jsonschema==2.6.0
 Flask_RESTful==0.3.7
 requests==2.22.0
 Flask==1.1.1
-Werkzeug==0.16.0
+Werkzeug==0.15.3
