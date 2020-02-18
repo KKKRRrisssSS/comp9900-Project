@@ -13,7 +13,7 @@ mccabe==0.6.1
 pylint==1.7.4
 six==1.11.0
 SQLAlchemy==1.1.14
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 wrapt==1.10.11
 requests
 firebase_admin
