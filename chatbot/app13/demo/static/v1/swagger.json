@@ -1,0 +1,853 @@
+{
+  "swagger": "2.0",
+  "basePath": "/v1",
+  "info": {
+    "version": "0.0.1",
+    "title": "user",
+    "description": "aaa"
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "search user by key parameter",
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "verify_token",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "messenger_ID",
+            "type": "integer",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "about_me": {
+                      "type": "string"
+                    },
+                    "current_certification": {
+                      "type": "string"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "isSupervisor": {
+                      "type": "integer"
+                    },
+                    "messenger_ID": {
+                      "type": "integer"
+                    },
+                    "program_uid": {
+                      "type": "string"
+                    },
+                    "specialist_level": {
+                      "type": "string"
+                    },
+                    "verify_token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "change user information by field",
+        "parameters": [
+          {
+            "name": "messenger_ID",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "field",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{verify_token}": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "change user information by field",
+        "parameters": [
+          {
+            "name": "verify_token",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "messenger_ID",
+            "type": "integer",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{is_approved}/{value}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "for supervisor",
+        "parameters": [
+          {
+            "name": "is_approved",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "log_name": {
+                        "type": "string"
+                      },
+                      "record_index": {
+                        "type": "string"
+                      },
+                      "user_email": {
+                        "type": "string"
+                      },
+                      "upload_time": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logbook/{username}/{logStatus}": {
+      "get": {
+        "tags": [
+          "Logbook"
+        ],
+        "summary": "look for user's logbook in by isActive",
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "logStatus",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "LogID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "LogID": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logbook": {
+      "put": {
+        "tags": [
+          "Logbook"
+        ],
+        "summary": "create new logbook by username and program",
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "program_uid",
+            "type": "integer",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "log_name",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logbook/{LogID}": {
+      "post": {
+        "tags": [
+          "Logbook"
+        ],
+        "summary": "update one field of logbook",
+        "parameters": [
+          {
+            "name": "LogID",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "field",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "LogID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Logbook"
+        ],
+        "summary": "get logbook data by LogID",
+        "parameters": [
+          {
+            "name": "LogID",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "cardiac_count": {
+                      "type": "integer"
+                    },
+                    "correlated_case_count": {
+                      "type": "integer"
+                    },
+                    "gta_count": {
+                      "type": "integer"
+                    },
+                    "library_case_count": {
+                      "type": "integer"
+                    },
+                    "live_case_count": {
+                      "type": "integer"
+                    },
+                    "live_case_course_count": {
+                      "type": "integer"
+                    },
+                    "logStatus": {
+                      "type": "string"
+                    },
+                    "log_name": {
+                      "type": "string"
+                    },
+                    "native_coronary_count": {
+                      "type": "integer"
+                    },
+                    "non_cardiac_count": {
+                      "type": "integer"
+                    },
+                    "non_coronary_count": {
+                      "type": "integer"
+                    },
+                    "total_case_count": {
+                      "type": "integer"
+                    },
+                    "program_uid": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/record": {
+      "get": {
+        "tags": [
+          "Record"
+        ],
+        "summary": "get list of records",
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "SupervisorID",
+            "type": "string",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "record_status",
+            "type": "string",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "RecordID": {
+                    "type": "string"
+                  },
+                  "record_name": {
+                    "type": "string"
+                  },
+                  "log_name": {
+                    "type": "string"
+                  },
+                  "user_email": {
+                    "type": "string"
+                  },
+                  "upload_day": {
+                    "type": "integer"
+                  },
+                  "upload_month": {
+                    "type": "integer"
+                  },
+                  "upload_year": {
+                    "type": "integer"
+                  },
+                  "upload_minute": {
+                    "type": "integer"
+                  },
+                  "upload_hour": {
+                    "type": "integer"
+                  },
+                  "upload_second": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/record/{RecordID}": {
+      "get": {
+        "tags": [
+          "Record"
+        ],
+        "summary": "check record by recordID",
+        "parameters": [
+          {
+            "name": "RecordID",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "DLP": {
+                      "type": "number"
+                    },
+                    "case_type": {
+                      "type": "string"
+                    },
+                    "co_reporting_doctor": {
+                      "type": "string"
+                    },
+                    "facility": {
+                      "type": "boolean"
+                    },
+                    "is_cardiac": {
+                      "type": "boolean"
+                    },
+                    "is_correlated": {
+                      "type": "boolean"
+                    },
+                    "is_gta": {
+                      "type": "boolean"
+                    },
+                    "is_native_coronary": {
+                      "type": "boolean"
+                    },
+                    "is_non_cardiac": {
+                      "type": "string"
+                    },
+                    "is_non_coronary": {
+                      "type": "string"
+                    },
+                    "log_name": {
+                      "type": "string"
+                    },
+                    "record_index": {
+                      "type": "string"
+                    },
+                    "record_status": {
+                      "type": "string"
+                    },
+                    "user_email": {
+                      "type": "string"
+                    },
+                    "log_uid": {
+                      "type": "integer"
+                    },
+                    "record_date": {
+                      "type": "integer"
+                    },
+                    "record_name": {
+                      "type": "integer"
+                    },
+                    "record_uid": {
+                      "type": "integer"
+                    },
+                    "supervisor_uid": {
+                      "type": "integer"
+                    },
+                    "upload_time": {
+                      "type": "integer"
+                    },
+                    "patient_details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Record"
+        ],
+        "summary": "check record by recordID",
+        "parameters": [
+          {
+            "name": "RecordID",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "field",
+            "type": "string",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "RecordID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/record/{username}/{log_name}/{record_name}": {
+      "get": {
+        "tags": [
+          "Record"
+        ],
+        "summary": "get record by username/log_name/record_name",
+        "parameters": [
+          {
+            "name": "username",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "log_name",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "record_name",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "RecordID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "RecordID": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/session/{session_id}": {
+      "get": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "get username by session_id",
+        "parameters": [
+          {
+            "name": "session_id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "get username by session_id",
+        "parameters": [
+          {
+            "name": "session_id",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "username",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
